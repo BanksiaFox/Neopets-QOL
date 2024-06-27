@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name         [Neopets] Half Price Day Tracker
-// @version      0.1
+// @version      1.0
 // @description  Adds text to the top of restocking pages with a countdown to the next half price day.
 // @author       BanksiaFox
+// @downloadURL  https://github.com/BanksiaFox/Neopets-QOL/raw/main/HPD-tracker.js
 // @match        https://www.neopets.com/objects.phtml?obj_type=*&type=shop
 // @match        https://www.neopets.com/objects.phtml?type=shop&obj_type=*
 // @icon         https://www.neopets.com//favicon.ico

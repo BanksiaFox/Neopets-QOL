@@ -1,13 +1,17 @@
 // ==UserScript==
 // @name         [Neopets] Half Price Day Tracker
-// @version      1.0
-// @description  Adds text to the top of restocking pages with a countdown to the next half price day.
+// @version      2026-03-16
+// @description  Adds text to restocking pages with a countdown to the next half price day.
 // @author       BanksiaFox
 // @downloadURL  https://github.com/BanksiaFox/Neopets-QOL/raw/main/HPD-tracker.js
 // @match        https://www.neopets.com/objects.phtml?obj_type=*&type=shop
 // @match        https://www.neopets.com/objects.phtml?type=shop&obj_type=*
-// @icon         https://www.neopets.com//favicon.ico
+// @icon         https://images.neopets.com/images/buddy/aim_aisha_chocolate.gif
 // ==/UserScript==
+
+///////////////////////////////////////////////////////////////////////////
+// Next update: Add a toggle for the embedded image so users can disable //
+///////////////////////////////////////////////////////////////////////////
 
 // Array of image URLs
 const imageURL = [
@@ -19,7 +23,7 @@ const imageURL = [
   "https://images.neopets.com/new_shopkeepers/t_1305.gif"
 ];
 
-// Function to calculate the next half price day
+// Calculate the next half price day
 function calculateDaysToHPD() {
   const NST = 'America/Los_Angeles';
   const today = new Date(new Intl.DateTimeFormat('en-US', { timeZone: NST }).format());
@@ -38,17 +42,36 @@ function getRandomImageURL() {
   return imageURL[Math.floor(Math.random() * imageURL.length)];
 }
 
-(function addHPDTracker() {
-  'use strict';
-  const tracker = document.querySelector('p.shop-info');
+// Append after inflation paragraph
+(function () {
+  function addHPDTracker() {
+    const ps = document.querySelectorAll("p.shop-info");
+    if (ps.length < 2) return false;
 
-  if (tracker) {
+    const target = ps[1]; // second <p class="shop-info"> not the first instance
+
     const daysToHPD = calculateDaysToHPD();
+    // ONLY FOR TESTING HPD
+    // const daysToHPD = 0;
     const randomImage = getRandomImageURL();
-    const hpdText = daysToHPD === 0
-      ? `<table><tr><td><img src="${randomImage}"></td><td>Today is <u>half price day!</u><br>Everything is 50% off.</td></tr></table>`
-      : `<i>The next half price day is <b>${daysToHPD}</b> days away.</i>`;
+    const HPDtext = daysToHPD === 0
+      ? `<table style="margin: 0 auto;"><tr><td><img src="${randomImage}"></td><td>Today is <u>half price day!</u><br>Everything is 50% off.</td></tr></table>`
+      : `The next half price day is <b>${daysToHPD}</b> days away...`;
 
-    tracker.innerHTML = `<center>${hpdText}</center>`;
+    target.appendChild(document.createElement("span"));
+    target.insertAdjacentHTML("beforeend", HPDtext);
+
+    return true;
+  }
+
+  if (!addHPDTracker()) {
+    const observer = new MutationObserver(() => {
+      if (addHPDTracker()) observer.disconnect();
+    });
+
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true
+    });
   }
 })();

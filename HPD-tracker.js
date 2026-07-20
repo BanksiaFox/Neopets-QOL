@@ -9,8 +9,6 @@
 // @icon         https://images.neopets.com/images/buddy/aim_aisha_disco.gif
 // ==/UserScript==
 
-// Next update: Add a toggle for the embedded image so users can disable
-
 // Feel free to disable the inserted image. It's just for funsies and isn't needed... I promise I won't be offended :-)
 const imageToggle = true;
 

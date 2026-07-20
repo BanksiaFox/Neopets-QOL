@@ -9,8 +9,10 @@
 // @icon         https://images.neopets.com/images/buddy/aim_aisha_disco.gif
 // ==/UserScript==
 
-// to do:
-// novelty favicon rotation to match bands
+/////////////////////////////////////////////////////////////////////////////////////////
+// Next update: Substitute embedded Flash player with conditional rotating band images //
+/////////////////////////////////////////////////////////////////////////////////////////
+
 (function() {
     'use strict';
 
@@ -25,8 +27,6 @@
         const overrides = [
             { match: '/ticketbooth', action: '/prehistoric/concerthall.phtml', label: 'Go to the Concert Hall' },
             { match: '/concerthall', action: '/prehistoric/ticketbooth.phtml', label: 'Go to the Ticket Booth' },
-            // Example: customize when a specific value appears in the URL
-            // { match: '/special-event', action: '/prehistoric/special.phtml', label: 'Enter Special Event' },
         ];
 
         for (const o of overrides) {

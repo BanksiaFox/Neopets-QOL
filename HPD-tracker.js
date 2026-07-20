@@ -1,17 +1,18 @@
 // ==UserScript==
 // @name         [Neopets] Half Price Day Tracker
-// @version      2026-03-16
+// @version      2026-03-15
 // @description  Adds text to restocking pages with a countdown to the next half price day.
 // @author       BanksiaFox
-// @downloadURL  https://github.com/BanksiaFox/Neopets-QOL/raw/main/HPD-tracker.js
+// @updateURL    https://github.com/BanksiaFox/Neopets-QOL/raw/main/HPD-tracker.js
 // @match        https://www.neopets.com/objects.phtml?obj_type=*&type=shop
 // @match        https://www.neopets.com/objects.phtml?type=shop&obj_type=*
-// @icon         https://images.neopets.com/images/buddy/aim_aisha_chocolate.gif
+// @icon         https://images.neopets.com/images/buddy/aim_aisha_disco.gif
 // ==/UserScript==
 
-///////////////////////////////////////////////////////////////////////////
-// Next update: Add a toggle for the embedded image so users can disable //
-///////////////////////////////////////////////////////////////////////////
+// Next update: Add a toggle for the embedded image so users can disable
+
+// Feel free to disable the inserted image. It's just for funsies and isn't needed... I promise I won't be offended :-)
+const imageToggle = true;
 
 // Array of image URLs
 const imageURL = [
@@ -43,35 +44,35 @@ function getRandomImageURL() {
 }
 
 // Append after inflation paragraph
-(function () {
-  function addHPDTracker() {
-    const ps = document.querySelectorAll("p.shop-info");
-    if (ps.length < 2) return false;
+(function() {
+    function addHPDTracker() {
+        const ps = document.querySelectorAll("p.shop-info");
+        if (ps.length < 2) return false;
 
-    const target = ps[1]; // second <p class="shop-info"> not the first instance
+        const target = ps[1]; // second <p class="shop-info"> not the first instance
 
-    const daysToHPD = calculateDaysToHPD();
-    // ONLY FOR TESTING HPD
-    // const daysToHPD = 0;
-    const randomImage = getRandomImageURL();
-    const HPDtext = daysToHPD === 0
-      ? `<table style="margin: 0 auto;"><tr><td><img src="${randomImage}"></td><td>Today is <u>half price day!</u><br>Everything is 50% off.</td></tr></table>`
-      : `The next half price day is <b>${daysToHPD}</b> days away...`;
+            const daysToHPD = calculateDaysToHPD();
+            // ONLY FOR TESTING HPD
+            // const daysToHPD = 0;
+            const randomImage = getRandomImageURL();
+            const HPDtext = daysToHPD === 0
+              ? `<table style="margin: 0 auto;"><tr><td><img src="${randomImage}"></td><td>Today is <u>half price day!</u><br>Everything is 50% off.</td></tr></table>`
+              : `The next half price day is <b>${daysToHPD}</b> days away...`;
 
-    target.appendChild(document.createElement("span"));
-    target.insertAdjacentHTML("beforeend", HPDtext);
+        target.appendChild(document.createElement("span"));
+        target.insertAdjacentHTML("beforeend", HPDtext);
 
-    return true;
-  }
+        return true;
+    }
 
-  if (!addHPDTracker()) {
-    const observer = new MutationObserver(() => {
-      if (addHPDTracker()) observer.disconnect();
-    });
+    if (!addHPDTracker()) {
+        const observer = new MutationObserver(() => {
+            if (addHPDTracker()) observer.disconnect();
+        });
 
-    observer.observe(document.documentElement, {
-      childList: true,
-      subtree: true
-    });
-  }
+        observer.observe(document.documentElement, {
+            childList: true,
+            subtree: true
+        });
+    }
 })();

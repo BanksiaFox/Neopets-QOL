@@ -3,7 +3,7 @@
 // @version      2026-07-20
 // @description  Adds buttons to the ticket booth and concert hall to travel between them. Because I'm obsessively neat about my open tabs. Enjoy!
 // @author       BanksiaFox
-// @updateURL    https://github.com/BanksiaFox/Neopets-QOL/raw/main/lazy-concerts.js
+// @updateURL    https://github.com/BanksiaFox/Neopets-QOL/raw/main/lazy-concerts.user.js
 // @match        https://www.neopets.com/prehistoric/ticketbooth.phtml*
 // @match        https://www.neopets.com/prehistoric/concerthall*.phtml
 // @icon         https://images.neopets.com/images/buddy/aim_aisha_disco.gif

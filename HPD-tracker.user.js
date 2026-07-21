@@ -3,7 +3,7 @@
 // @version      2026-03-15
 // @description  Adds text to restocking pages with a countdown to the next half price day.
 // @author       BanksiaFox
-// @updateURL    https://github.com/BanksiaFox/Neopets-QOL/raw/main/HPD-tracker.js
+// @updateURL    https://github.com/BanksiaFox/Neopets-QOL/raw/main/HPD-tracker.user.js
 // @match        https://www.neopets.com/objects.phtml?obj_type=*&type=shop
 // @match        https://www.neopets.com/objects.phtml?type=shop&obj_type=*
 // @icon         https://images.neopets.com/images/buddy/aim_aisha_disco.gif
